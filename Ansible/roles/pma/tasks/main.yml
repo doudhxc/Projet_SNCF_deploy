@@ -1,0 +1,7 @@
+---
+- name: copie des fichiers pma
+  copy: 
+     src: /home/centos/phpMyAdmin-5.0.1-all-languages/
+     dest: /var/www/html/pma/
+...
+

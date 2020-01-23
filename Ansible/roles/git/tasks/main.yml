@@ -1,0 +1,26 @@
+---
+
+- name: installation de GIT
+  yum:
+    name: git
+    state: latest
+
+- name: clean du dossier git step
+  shell: 'rm -rf /var/www/html/.git && rm -rf /var/www/html/*' 
+
+- name: pull du dossier SNCF
+  git:
+     repo=https://github.com/esaintmi/Projet_SNCF.git
+     version=dev
+     dest=/var/www/html
+
+
+- name: changement de proprietaire du dossier
+  file:
+     path: /var/www/html
+     state: directory
+     recurse: yes
+     owner: centos
+     group: centos 
+
+...

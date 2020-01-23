@@ -1,0 +1,46 @@
+---
+- name: installation de mariadb
+  yum:
+    name: mariadb-server
+    state: latest
+
+- name: installation du module python2 module
+  yum:
+   name: MySQL-python
+   state: latest
+
+- name: disable firewall
+  shell: "systemctl stop firewalld"
+
+- name: start mariadb
+  shell: "systemctl start mariadb"
+
+- name: enable mariadb
+  shell: "systemctl enable mariadb"
+
+- name: nouvel utilisateur avec privilèges
+  mysql_user:
+     host: 'localhost'
+     name: user
+     password: root
+     priv: '*.*:ALL'
+     state: present
+
+- name: nouvel utilisateur avec privilèges
+  mysql_user:
+     host: '%'
+     name: user
+     password: root
+     priv: '*.*:ALL'
+     state: present
+
+- name: Import table.sql
+  mysql_db:
+     state: import
+     name: all
+     login_user: user
+     login_password: root
+     target: /var/www/html/table.sql
+     
+...
+

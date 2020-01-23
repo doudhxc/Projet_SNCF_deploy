@@ -1,0 +1,6 @@
+---
+- name: intallation de php 5.4.16
+  yum:
+     name: php
+     state: latest
+...

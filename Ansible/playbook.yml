@@ -1,0 +1,20 @@
+---
+- name: installation des serveurs
+  hosts: server_dev
+  remote_user: root
+  
+
+  tasks:
+     - name: update
+       yum: name=* state=latest 
+  
+     - name: disable SELinux
+       shell: "setenforce 0"
+
+  roles:
+    - httpd
+    - git
+    - php
+    - mysql
+
+...
